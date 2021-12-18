@@ -1,19 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {ColourPalette} from 'src/styles/ColourPalette';
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginHorizontal: 5,
-    backgroundColor: ColourPalette.appBG,
-  },
-  flatListView: {
-    marginVertical: 10,
-    flex: 1,
-  },
-  loader: {
-    marginTop: 10,
-    alignItems: 'center',
-  },
   searchView: {
     width: '100%',
     flexDirection: 'row',
@@ -31,6 +18,7 @@ const styles = StyleSheet.create({
 
     paddingRight: 10,
   },
+  searchBtn: {color: ColourPalette.blue},
 });
 
 export default styles;

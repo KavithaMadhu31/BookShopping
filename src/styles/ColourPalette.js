@@ -4,4 +4,5 @@ export const ColourPalette = {
   textPrimary: '#243B63',
   appBG: '#F9F9FF',
   borderColor: '#DCE0E6',
+  blue: '#0067B1',
 };

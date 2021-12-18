@@ -10,10 +10,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     flex: 1,
   },
-  loader: {
-    marginTop: 10,
-    alignItems: 'center',
-  },
+  
   searchView: {
     width: '100%',
     flexDirection: 'row',

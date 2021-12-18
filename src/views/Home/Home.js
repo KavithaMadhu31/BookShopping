@@ -1,30 +1,26 @@
 // react library imports
 import React, {useEffect, useState, useRef} from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  SafeAreaView,
-  View,
-  RefreshControl,
-} from 'react-native';
+import {FlatList, SafeAreaView, View, RefreshControl} from 'react-native';
 // component imports
 import BookList from 'src/components/BookList/BookList';
-
+import HomeSearch from 'src/components/HomeSearch/HomeSearch';
 // style imports
 import styles from './styles';
-
+import {ColourPalette} from 'src/styles/ColourPalette';
+// services imports
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchBookList} from 'src/services/HomeServices';
-import HomeSearch from 'src/components/HomeSearch/HomeSearch';
+
+
 const Home = () => {
   let data = useSelector(state => state.HomeReducers.data);
-  // const [currentPage, setCurrentPage] = useState(1);
+
   const [booksData, setBooksData] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const currentPage = useRef(1);
 
   let dispatch = useDispatch();
-  // call API
+  
   useEffect(() => {
     // Call api in every 3 second
 
@@ -80,6 +76,10 @@ const Home = () => {
     });
     setBooksData(filteredValue);
   };
+  // pull to refresh
+  const handleRefresh = () => {
+    getBookList(currentPage.current);
+  };
   // child render item
   const childListRenderItem = ({item, index}) => <BookList item={item} />;
 
@@ -103,16 +103,16 @@ const Home = () => {
             renderItem={childListRenderItem}
             keyExtractor={childListKeyExtractor}
             showsVerticalScrollIndicator={false}
-            // refreshControl={
-            //   <RefreshControl
-            //     refreshing={this.state.isRefreshing}
-            //     onRefresh={this.onRefresh}
-            //     title="Loading..."
-            //     titleColor={'red'}
-            //     tintColor={'red'}
-            //     colors={['red']}
-            //   />
-            // }
+            refreshControl={
+              <RefreshControl
+                refreshing={false}
+                onRefresh={handleRefresh}
+                title="Loading..."
+                titleColor={ColourPalette.textPrimary}
+                tintColor={ColourPalette.textPrimary}
+                colors={[ColourPalette.textPrimary]}
+              />
+            }
           />
         </View>
       </SafeAreaView>

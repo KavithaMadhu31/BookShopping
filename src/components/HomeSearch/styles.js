@@ -20,6 +20,8 @@ const styles = StyleSheet.create({
   },
   searchBtn: {color: ColourPalette.blue},
   filerByASC: {marginHorizontal: 10, color: ColourPalette.blue},
+  filterView: {flexDirection: 'row', marginVertical: 5},
+  filterTxt: {marginRight: 10},
 });
 
 export default styles;

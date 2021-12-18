@@ -1,32 +1,36 @@
-import { FETCHING_DATA, FETCHING_DATA_SUCCESS, FETCHING_DATA_FAILURE } from 'src/actions/ActionConstants';
+import {
+  FETCHING_DATA,
+  FETCHING_DATA_SUCCESS,
+  FETCHING_DATA_FAILURE,
+} from 'src/actions/ActionConstants';
 const initialState = {
   data: [],
   dataFetched: false,
   isFetching: false,
-  error: false
-}
+  error: false,
+};
 
-export default function dataReducer (state = initialState, action) {
+export default function homeReducer(state = initialState, action) {
   switch (action.type) {
     case FETCHING_DATA:
       return {
         ...state,
         data: [],
-        isFetching: true
-      }
+        isFetching: true,
+      };
     case FETCHING_DATA_SUCCESS:
       return {
         ...state,
         isFetching: false,
-        data: action.data
-      }
+        data: action.data,
+      };
     case FETCHING_DATA_FAILURE:
       return {
         ...state,
         isFetching: false,
-        error: true
-      }
+        error: true,
+      };
     default:
-      return state
+      return state;
   }
 }

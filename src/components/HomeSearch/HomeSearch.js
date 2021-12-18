@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, TextInput, TouchableOpacity, Text} from 'react-native';
 import styles from './styles';
 const HomeSearch = props => {
@@ -15,8 +15,8 @@ const HomeSearch = props => {
           <Text style={styles.searchBtn}>Search</Text>
         </TouchableOpacity>
       </View>
-      <View style={{flexDirection: 'row', marginVertical: 5}}>
-        <Text style={{marginRight: 10}}>Filter by</Text>
+      <View style={styles.filterView}>
+        <Text style={styles.filterTxt}>Filter by</Text>
         <TouchableOpacity onPress={props.handleFilterDataAsc}>
           <Text style={styles.filerByASC}>ASC</Text>
         </TouchableOpacity>

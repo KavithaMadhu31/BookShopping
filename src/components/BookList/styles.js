@@ -1,26 +1,37 @@
 import {StyleSheet} from 'react-native';
-
+import {ColourPalette} from 'src/styles/ColourPalette';
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'row',
-    marginHorizontal: 5,
+    marginHorizontal: 3,
     marginVertical: 5,
-    backgroundColor: 'grey',
+    backgroundColor: ColourPalette.white,
     borderRadius: 8,
+    padding: 5,
+    shadowColor: ColourPalette.textPrimary,
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: 1,
+    shadowRadius: 6,
+    borderWidth: 0.5,
+    borderColor: ColourPalette.borderColor,
   },
-  nameView: {
+  subContainer: {
+    flexDirection: 'row',
     flex: 1,
-    justifyContent: 'center',
-    borderTopEndRadius: 8,
-    borderBottomEndRadius: 8,
   },
-  name: {
-    fontSize: 18,
-    color: 'black',
+  titleTxt: {
+    fontSize: 14,
+    color: ColourPalette.textPrimary,
+
+    flex: 1,
   },
-  phone: {
-    marginTop: 10,
+  createdAt: {
+    fontSize: 10,
+    color: ColourPalette.textPrimary,
+  },
+  authourTxt: {
+    marginTop: 5,
+    fontSize: 12,
+    color: ColourPalette.textPrimary,
   },
 });
 

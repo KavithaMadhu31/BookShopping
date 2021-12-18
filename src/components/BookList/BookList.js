@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableWithoutFeedback, View} from 'react-native';
 import styles from './styles';
 const BookList = props => {
   // getting data from parent
@@ -7,15 +7,18 @@ const BookList = props => {
 
   let title = item && item.title ? item.title : '';
   let author = item && item.author ? item.author : '';
+  let createdAt = item && item.created_at ? item.created_at : '';
   console.log('props', title);
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onLongPress={() => props.showPopup(item)}>
-      <View style={styles.nameView}>
-        <Text style={styles.name}>{`${title} ${author}`}</Text>
+    <TouchableWithoutFeedback>
+      <View style={styles.container}>
+        <View style={styles.subContainer}>
+          <Text style={styles.titleTxt}>{`${title}`}</Text>
+          <Text style={styles.createdAt}>{`${createdAt}`}</Text>
+        </View>
+        <Text style={styles.authourTxt}>{`${author}`}</Text>
       </View>
-    </TouchableOpacity>
+    </TouchableWithoutFeedback>
   );
 };
 

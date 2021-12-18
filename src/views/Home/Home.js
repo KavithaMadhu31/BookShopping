@@ -1,6 +1,6 @@
 // react library imports
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, FlatList, SafeAreaView, View} from 'react-native';
+import {ActivityIndicator, FlatList, SafeAreaView, View,RefreshControl} from 'react-native';
 // component imports
 import BookList from 'src/components/BookList/BookList';
 
@@ -35,6 +35,16 @@ const Home = () => {
         data={data.hits}
         renderItem={childListRenderItem}
         keyExtractor={childListKeyExtractor}
+        // refreshControl={
+        //   <RefreshControl
+        //     refreshing={this.state.isRefreshing}
+        //     onRefresh={this.onRefresh}
+        //     title="Loading..."
+        //     titleColor={'red'}
+        //     tintColor={'red'}
+        //     colors={['red']}
+        //   />
+        // }
       />
     </View>
   );

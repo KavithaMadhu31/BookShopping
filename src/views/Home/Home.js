@@ -1,5 +1,5 @@
 // react library imports
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -18,26 +18,32 @@ import {fetchBookList} from 'src/services/HomeServices';
 import HomeSearch from 'src/components/HomeSearch/HomeSearch';
 const Home = () => {
   let data = useSelector(state => state.HomeReducers.data);
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
   const [booksData, setBooksData] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const currentPage = useRef(1);
+
   let dispatch = useDispatch();
   // call API
   useEffect(() => {
-    dispatch(fetchBookList(currentPage));
-    // // Call api in every 3 second
-    // let apiInterval = setInterval(() => {
-    //   console.log('current value', currentPage);
-    //   dispatch(fetchBookList(currentPage));
-    //   setCurrentPage(currentPage + 1);
-    // }, 3000);
-    // // clear interval ..
-    // return () => clearInterval(apiInterval);
+    // Call api in every 3 second
+
+    let apiInterval = setInterval(() => {
+      getBookList(currentPage.current);
+      console.log('current value is', currentPage.current);
+      currentPage.current = currentPage.current + 1;
+    }, 3000);
+    // clear interval ..
+    return () => clearInterval(apiInterval);
   }, []);
   useEffect(() => {
-    setBooksData(data.hits);
+    if (data.hits != undefined) {
+      setBooksData(booksData.concat(data.hits));
+    }
   }, [data]);
-
+  const getBookList = pageCount => {
+    dispatch(fetchBookList(pageCount));
+  };
   const handleSearchValue = text => {
     setSearchValue(text);
     if (text.length == 0) {
@@ -62,7 +68,7 @@ const Home = () => {
       var d = new Date(b.created_at);
       return c - d;
     });
-    console.log('the filteredValue', filteredValue);
+
     setBooksData(filteredValue);
   };
   // sort item in descending order
@@ -72,7 +78,6 @@ const Home = () => {
       var d = new Date(b.created_at);
       return c + d;
     });
-    console.log('the filteredValue', filteredValue);
     setBooksData(filteredValue);
   };
   // child render item

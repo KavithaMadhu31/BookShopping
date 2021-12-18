@@ -1,17 +1,18 @@
 // react library imports
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, FlatList, SafeAreaView, View} from 'react-native';
 // component imports
 import BookList from 'src/components/BookList/BookList';
-// API imports
-import {useFetchBookAPI} from 'src/services/HomeServices';
+
 // style imports
 import styles from './styles';
 
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchBookList} from 'src/services/HomeServices';
 const Home = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [booksData, setbooksData] = useState([]);
+  let data = useSelector(state => state.HomeReducers.data);
   const [currentPage, setCurrentPage] = useState(1);
+  let dispatch = useDispatch();
   // call API
   useEffect(() => {
     getBookLists();
@@ -19,11 +20,7 @@ const Home = () => {
 
   // get books list from API
   async function getBookLists() {
-    let data = await useFetchBookAPI(currentPage);
-
-    setbooksData(data);
-
-    setIsLoading(false);
+    dispatch(fetchBookList(currentPage));
   }
 
   // child render item
@@ -35,7 +32,7 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={booksData}
+        data={data.hits}
         renderItem={childListRenderItem}
         keyExtractor={childListKeyExtractor}
       />

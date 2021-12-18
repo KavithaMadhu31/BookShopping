@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
     shadowColor: ColourPalette.textPrimary,
     shadowOffset: {width: 0, height: 0},
     shadowOpacity: 1,
-    shadowRadius: 6,
-    borderWidth: 0.5,
+    shadowRadius: 1,
+    borderWidth: 0.1,
     borderColor: ColourPalette.borderColor,
   },
   subContainer: {

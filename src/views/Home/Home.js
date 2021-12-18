@@ -24,15 +24,20 @@ const Home = () => {
   let dispatch = useDispatch();
   // call API
   useEffect(() => {
-    getBookLists();
+    dispatch(fetchBookList(currentPage));
+    // // Call api in every 3 second
+    // let apiInterval = setInterval(() => {
+    //   console.log('current value', currentPage);
+    //   dispatch(fetchBookList(currentPage));
+    //   setCurrentPage(currentPage + 1);
+    // }, 3000);
+    // // clear interval ..
+    // return () => clearInterval(apiInterval);
   }, []);
   useEffect(() => {
     setBooksData(data.hits);
   }, [data]);
-  // get books list from API
-  async function getBookLists() {
-    dispatch(fetchBookList(currentPage));
-  }
+
   const handleSearchValue = text => {
     setSearchValue(text);
     if (text.length == 0) {
@@ -50,6 +55,26 @@ const Home = () => {
       setBooksData(filteredValue);
     }
   };
+  // sort item in ascending order
+  const handleFilterDataAsc = () => {
+    let filteredValue = data.hits.sort(function (a, b) {
+      var c = new Date(a.created_at);
+      var d = new Date(b.created_at);
+      return c - d;
+    });
+    console.log('the filteredValue', filteredValue);
+    setBooksData(filteredValue);
+  };
+  // sort item in descending order
+  const handleFilterDataDesc = () => {
+    let filteredValue = data.hits.sort(function (a, b) {
+      var c = new Date(a.created_at);
+      var d = new Date(b.created_at);
+      return c + d;
+    });
+    console.log('the filteredValue', filteredValue);
+    setBooksData(filteredValue);
+  };
   // child render item
   const childListRenderItem = ({item, index}) => <BookList item={item} />;
 
@@ -57,30 +82,36 @@ const Home = () => {
   const childListKeyExtractor = (item, index) => String(index);
 
   return (
-    <View style={styles.container}>
-      <HomeSearch
-        searchValue={searchValue}
-        handleSearchValue={handleSearchValue}
-        handleSearch={handleSearch}
-      />
+    <>
+      <SafeAreaView style={{flex: 1}}>
+        <View style={styles.container}>
+          <HomeSearch
+            searchValue={searchValue}
+            handleSearchValue={handleSearchValue}
+            handleSearch={handleSearch}
+            handleFilterDataAsc={handleFilterDataAsc}
+            handleFilterDataDesc={handleFilterDataDesc}
+          />
 
-      <FlatList
-        data={booksData}
-        renderItem={childListRenderItem}
-        keyExtractor={childListKeyExtractor}
-        showsVerticalScrollIndicator={false}
-        // refreshControl={
-        //   <RefreshControl
-        //     refreshing={this.state.isRefreshing}
-        //     onRefresh={this.onRefresh}
-        //     title="Loading..."
-        //     titleColor={'red'}
-        //     tintColor={'red'}
-        //     colors={['red']}
-        //   />
-        // }
-      />
-    </View>
+          <FlatList
+            data={booksData}
+            renderItem={childListRenderItem}
+            keyExtractor={childListKeyExtractor}
+            showsVerticalScrollIndicator={false}
+            // refreshControl={
+            //   <RefreshControl
+            //     refreshing={this.state.isRefreshing}
+            //     onRefresh={this.onRefresh}
+            //     title="Loading..."
+            //     titleColor={'red'}
+            //     tintColor={'red'}
+            //     colors={['red']}
+            //   />
+            // }
+          />
+        </View>
+      </SafeAreaView>
+    </>
   );
 };
 

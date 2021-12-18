@@ -8,7 +8,7 @@ const BookList = props => {
   let title = item && item.title ? item.title : '';
   let author = item && item.author ? item.author : '';
   let createdAt = item && item.created_at ? item.created_at : '';
-  console.log('props', title);
+
   return (
     <TouchableWithoutFeedback>
       <View style={styles.container}>

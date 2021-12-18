@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   searchBtn: {color: ColourPalette.blue},
+  filerByASC: {marginHorizontal: 10, color: ColourPalette.blue},
 });
 
 export default styles;

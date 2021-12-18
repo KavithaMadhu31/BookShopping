@@ -9,7 +9,7 @@ store.subscribe(
   //called each time store is changed
   () => {
     console.log('Store Updated..');
-    console.log(store.getState());
+    // console.log(store.getState());
   },
 );
 

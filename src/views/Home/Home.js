@@ -11,7 +11,6 @@ import {ColourPalette} from 'src/styles/ColourPalette';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchBookList} from 'src/services/HomeServices';
 
-
 const Home = () => {
   let data = useSelector(state => state.HomeReducers.data);
 
@@ -20,13 +19,12 @@ const Home = () => {
   const currentPage = useRef(1);
 
   let dispatch = useDispatch();
-  
+
   useEffect(() => {
-    // Call api in every 3 second
+    // Call api in every 3 second 
 
     let apiInterval = setInterval(() => {
       getBookList(currentPage.current);
-      console.log('current value is', currentPage.current);
       currentPage.current = currentPage.current + 1;
     }, 3000);
     // clear interval ..

@@ -8,7 +8,7 @@ const store = createStore(rootReducer, initialstate, applyMiddleware(thunk)); //
 store.subscribe(
   //called each time store is changed
   () => {
-    console.log('Store Updated..');
+    // console.log('Store Updated..');
     // console.log(store.getState());
   },
 );
